@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Email</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 80%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #4285f4;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Compose Email</h1>
+        <form action="/communication/send-email" method="post">
+            <label for="to">To:</label>
+            <input type="email" name="to" required><br>
+
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" required><br>
+
+            <label for="htmlBody">HTML Body:</label>
+            <textarea name="htmlBody" rows="4" required></textarea><br>
+
+            <label for="useTemplate">Use Template:</label>
+            <input type="checkbox" name="useTemplate"><br>
+
+            <label for="templateId">Template:</label>
+            <select name="templateId">
+                <% if (Array.isArray(templates)) { %>
+                    <% templates.forEach(template => { %>
+                        <option value="<%= template.TemplateId %>"><%= template.Name %></option>
+                    <% }); %>
+                <% } else { %>
+                    <option value="" disabled>No templates available</option>
+                <% } %>
+            </select><br>
+
+            <button type="submit">Send Email</button>
+        </form>
+    </div>
+</body>
+</html>
