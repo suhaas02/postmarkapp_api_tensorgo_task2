@@ -1,8 +1,10 @@
 import axios from "axios"
 const postmarkApiKey = 'c182d055-763e-494c-ac95-641bef4dd49a';
 
-const sendEmail = async (req, res) => {
+const composeEmail = async (req, res) => {
   try {
+    console.log(req.body);
+    console.log("comose email")
     const { to, HtmlBody, Subject } = req.body;
 
     // Replace the following block with actual Postmark API integration
@@ -36,5 +38,5 @@ const sendEmail = async (req, res) => {
 };
 
 export {
-  sendEmail
+  composeEmail
 }

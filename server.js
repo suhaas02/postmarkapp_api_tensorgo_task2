@@ -90,6 +90,7 @@ import fetch from 'node-fetch'
 import communicationRoutes from './routes/communication.js'
 import './passport.js';
 import { isLoggedIn } from './utils.js';
+// import { composeEmail } from './controllers/communication.js';
 const app = express();
 const port = 3000;
 app.use(express.json());

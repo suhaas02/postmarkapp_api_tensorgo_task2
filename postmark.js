@@ -34,12 +34,14 @@ import { ServerClient } from 'postmark';
 const client = new ServerClient('c182d055-763e-494c-ac95-641bef4dd49a');
 
 const sendEmail = async (to, subject, htmlBody) => {
+  
   const email = {
     From: '20bec055@iiitdwd.ac.in',
     To: to,
     Subject: subject,
     HtmlBody: htmlBody,
   };
+  console.log(email);
 
   try {
     const data = await client.sendEmail(email);

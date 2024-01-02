@@ -8,8 +8,9 @@
 import express from 'express';
 import { Router } from 'express';
 import {isLoggedIn} from '../utils.js';
-import { sendEmail } from '../controllers/communication.js';
+// import { composeEmail } from '../controllers/communication.js';
 import fetch from 'node-fetch'
+import { sendEmail } from '../postmark.js';
 const router = Router();
 
 // Middleware to protect routes requiring authentication
@@ -41,8 +42,8 @@ router.get('/compose-email', isLoggedIn, async (req, res) => {
 });
 router.post('/send-email', isLoggedIn, async (req, res) => {
   try {
-    const { to, Subject, useTemplate, templateId } = req.body;
-
+    const { to, subject, useTemplate, templateId, htmlBody } = req.body;
+    console.log(req.body);
     if (useTemplate && templateId) {
       // If the user chooses to use a template and has selected one
       const serverToken = 'c182d055-763e-494c-ac95-641bef4dd49a'; // Replace with your actual token
@@ -55,7 +56,8 @@ router.post('/send-email', isLoggedIn, async (req, res) => {
         body: JSON.stringify({
           To: to,
           TemplateId: templateId,
-          Subject: Subject,
+          Subject: subject,
+          
         }),
       });
 
@@ -70,10 +72,9 @@ router.post('/send-email', isLoggedIn, async (req, res) => {
       const resultData = await result.json();
       res.send(resultData);
     } else {
-      const regularEmailResult = await sendEmail(to, Subject, HtmlBody);
+      const regularEmailResult = await sendEmail(to, subject, htmlBody);
       res.send(regularEmailResult);
-      // Handle the case where the user doesn't choose to use a template
-      // You can add the logic for sending a regular email here
+      
     }
   } catch (err) {
     console.error('Error sending email:', err);
