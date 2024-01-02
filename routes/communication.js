@@ -21,7 +21,7 @@ router.get('/compose-email', isLoggedIn, async (req, res) => {
   try {
       // Fetch available templates from Postmark API
       // Assuming you have a server token stored securely
-      const serverToken = 'c182d055-763e-494c-ac95-641bef4dd49a'; // Replace with your actual token
+      const serverToken = 'process.env.POSTMARK_SERVER_API_TOKEN'; // Replace with your actual token
 
       const templatesResponse = await fetch(`https://api.postmarkapp.com/templates?count=100&offset=0`, {
           headers: {
@@ -46,7 +46,7 @@ router.post('/send-email', isLoggedIn, async (req, res) => {
     console.log(req.body);
     if (useTemplate && templateId) {
       // If the user chooses to use a template and has selected one
-      const serverToken = 'c182d055-763e-494c-ac95-641bef4dd49a'; // Replace with your actual token
+      const serverToken = 'process.env.POSTMARK_SERVER_API_TOKEN'; // Replace with your actual token
       const result = await fetch('https://api.postmarkapp.com/email/withTemplate', {
         method: 'POST',
         headers: {

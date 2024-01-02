@@ -30,7 +30,6 @@
 // };
 
 import { ServerClient } from 'postmark';
-
 const client = new ServerClient('c182d055-763e-494c-ac95-641bef4dd49a');
 
 const sendEmail = async (to, subject, htmlBody) => {

@@ -1,5 +1,5 @@
 import axios from "axios"
-const postmarkApiKey = 'c182d055-763e-494c-ac95-641bef4dd49a';
+const postmarkApiKey = process.env.POSTMARK_SERVER_API_TOKEN;
 
 const composeEmail = async (req, res) => {
   try {
