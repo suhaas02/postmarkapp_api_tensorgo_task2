@@ -6,8 +6,8 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 
 passport.use(new GoogleStrategy({
-    clientID: '570722112717-6lehllavr24nci5s09loisg0m4vevhis.apps.googleusercontent.com',
-    clientSecret: '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',
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/callback",
     passReqToCallback: true
   },

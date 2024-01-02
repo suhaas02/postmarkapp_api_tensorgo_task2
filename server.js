@@ -97,7 +97,7 @@ dotenv.config();
 const port = 3000;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-mongoose.connect('mongodb+srv://20bec055:20bec055@cluster0.ub5hix1.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.DB_URI,
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,
